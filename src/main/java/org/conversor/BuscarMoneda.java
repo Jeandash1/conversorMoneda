@@ -9,18 +9,17 @@ import com.google.gson.Gson;
 
 public class BuscarMoneda {
 
-    public Moneda moneda(String base_code, String target_code, double conversion_rate, double conversion_result) {
+    public Moneda moneda(String base_code) {
 
 
         // se usa la API para obtener el tipo de cambio de con "pair y de ultimas el valor que desea convertir"
-        String direccion = "https://v6.exchangerate-api.com/v6/c481330cf6a923e607df8780/pair/" + 
-            base_code + "/" + target_code + "/" + conversion_rate;
+        String direccion = "https://v6.exchangerate-api.com/v6/c481330cf6a923e607df8780/latest/USD";
 
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(java.net.URI.create(direccion))
-                .build();
+            .uri(java.net.URI.create(direccion))
+            .build();
 
         HttpResponse<String> response = null;
 
