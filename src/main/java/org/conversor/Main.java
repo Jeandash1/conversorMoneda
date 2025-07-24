@@ -1,7 +1,6 @@
 package org.conversor;
 
 import java.util.Scanner;
-
 import org.conversor.models.Moneda;
 
 public class Main {
@@ -10,8 +9,10 @@ public class Main {
 
         BuscarMoneda buscar = new BuscarMoneda();
         System.out.println("--  Bienvenido al conversor de monedas  -- \n");
-
-        System.out.println("""
+        
+        int opcion = 0; // Valor para salir del bucle
+        while (opcion != 7) {
+            System.out.println("""
             *****************************************
             
             Bienvenido al conversor de monedas.
@@ -27,22 +28,54 @@ public class Main {
             ******************************************
             """);
 
-        try{
-            System.out.println("Escriba el tipo de cambio: ");
-            var base_code = escribir.nextLine();
+            System.out.println("Seleccione una opción valida: ");
+            opcion = escribir.nextInt();
 
-            Moneda moneda = buscar.moneda(base_code);
-            System.out.println(moneda);
+            if (opcion == 7) {
+                System.out.println("Gracias por usar el converson de monedas :)");
+            }
 
-            Json archivo = new Json();
-            archivo.guardarJson(moneda);
+            switch (opcion) {
+                case 1:
+                    base_code = "USD";
+                    destino = "ARS";
 
-        }catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            return;
+                    break;
+                case 2:
+                    base_code = "USD";
+                    destino = "COP";
+                    break;
+                case 3:
+                    base_code = "BRL";
+                    destino = "USD";
+                    break;
+                case 4:
+                    base_code = "MXN";
+                    destino = "COP";
+                    break;
+                case 5:
+                    base_code = "USD";
+                    destino = "EUR";
+                    break;
+                default:
+                System.out.println("Por favor, seleccione una opción válida.");
+                continue;
+            }
+
+            try{
+                System.out.println("Escriba el tipo de cambio: ");
+                var base_code = escribir.nextLine();
+
+                Moneda moneda = buscar.moneda(base_code);
+                System.out.println(moneda);
+
+                Json archivo = new Json();
+                archivo.guardarJson(moneda);
+
+            }catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+                return;
+            }            
         }
-
-        
-
     }
 }

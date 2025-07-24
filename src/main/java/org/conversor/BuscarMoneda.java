@@ -4,15 +4,15 @@ import java.io.IOException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Map;
+
 import org.conversor.models.Moneda;
 import com.google.gson.Gson;
 
 public class BuscarMoneda {
 
-    public Moneda moneda(String base_code) {
+    public Moneda moneda(String base_code, Map<String, Double> conversion_rates) {
 
-
-        // se usa la API para obtener el tipo de cambio de con "pair y de ultimas el valor que desea convertir"
         String direccion = "https://v6.exchangerate-api.com/v6/c481330cf6a923e607df8780/latest/USD";
 
         HttpClient client = HttpClient.newHttpClient();
